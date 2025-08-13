@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "concurrently": "^9.2.0"
+  },
+  "dependencies": {
+    "@dnd-kit/core": "^6.3.1"
+  }
+}
