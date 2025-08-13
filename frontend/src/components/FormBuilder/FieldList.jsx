@@ -6,7 +6,7 @@ const FieldList = ({ forms }) => {
         <ul className="mt-4 flex space-y-2">
             {forms.map(form => (
                 <li key={form._id} className="bg-white rounded p-4 w-full max-w-md">
-                    <h2 className="text-lg text-left font-semibold mb-3">{form.title}</h2>
+                    <h2 className="text-lg text-left font-semibold mb-3 text-black">{form.title}</h2>
                     <div className="flex flex-wrap gap-2">
                         <Link 
                             to={`/forms/view/${form._id}`} 

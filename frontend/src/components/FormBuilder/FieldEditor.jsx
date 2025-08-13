@@ -46,12 +46,12 @@ const FieldEditor = ({ field, onChange, onRemove }) => {
     return (
         <div className="border p-4 rounded mb-4 bg-gray-50">
             {/* Question Type */}
-            <label className="block mb-2">
+            <label className="block mb-2 text-black">
                 Question Type:
                 <select
                     value={localField.type}
                     onChange={(e) => updateField('type', e.target.value)}
-                    className="border rounded w-full p-2 mt-1"
+                    className="border rounded w-full p-2 mt-1 text-black"
                 >
                     <option value="categorize">Categorize</option>
                     <option value="cloze">Cloze</option>
@@ -63,31 +63,31 @@ const FieldEditor = ({ field, onChange, onRemove }) => {
             </label>
 
             {/* Question Text */}
-            <label className="block mb-2">
+            <label className="block mb-2 text-black">
                 Question Text:
                 <input
                     type="text"
                     value={localField.questionText || ''}
                     onChange={(e) => updateField('questionText', e.target.value)}
-                    className="border rounded w-full p-2 mt-1"
+                    className="border rounded w-full p-2 mt-1 text-black"
                 />
             </label>
 
             {/* Question Image */}
-            <label className="block mb-2">
+            <label className="block mb-2 text-black">
                 Question Image URL:
                 <input
                     type="text"
                     value={localField.questionImageUrl || ''}
                     onChange={(e) => updateField('questionImageUrl', e.target.value)}
-                    className="border rounded w-full p-2 mt-1"
+                    className="border rounded w-full p-2 mt-1 text-black"
                 />
             </label>
 
             {/* --- Conditional Rendering by Type --- */}
             {localField.type === 'mcq' || localField.type === 'mca' ? (
                 <div className="mb-2">
-                    <span className="font-semibold">Options:</span>
+                    <span className="font-semibold text-black">Options:</span>
                     {(localField.options || []).map((option, index) => (
                         <div key={index} className="flex gap-2 mt-1">
                             <input
@@ -95,7 +95,7 @@ const FieldEditor = ({ field, onChange, onRemove }) => {
                                 placeholder="Option text"
                                 value={option.text}
                                 onChange={(e) => updateOption(index, 'text', e.target.value)}
-                                className="border rounded w-full p-2"
+                                className="border rounded w-full p-2 text-black"
                             />
                             <input
                                 type="checkbox"
@@ -107,7 +107,7 @@ const FieldEditor = ({ field, onChange, onRemove }) => {
                                 placeholder="Order"
                                 value={option.order}
                                 onChange={(e) => updateOption(index, 'order', Number(e.target.value))}
-                                className="border rounded p-1 w-20"
+                                className="border rounded p-1 w-20 text-black"
                             />
                             <button
                                 type="button"
@@ -130,7 +130,7 @@ const FieldEditor = ({ field, onChange, onRemove }) => {
 
                          {localField.type === 'cloze' && (
                  <>
-                     <label className="block mb-2">
+                     <label className="block mb-2 text-black">
                          Cloze Sentence:
                          <div className="border rounded w-full p-2 mt-1 bg-white">
                              <div className="mb-2 flex gap-2">
@@ -179,7 +179,7 @@ const FieldEditor = ({ field, onChange, onRemove }) => {
                                  id={`cloze-textarea-${localField.order || 0}`}
                                  value={localField.clozeSentence || ''}
                                  onChange={(e) => updateField('clozeSentence', e.target.value)}
-                                 className="w-full border-0 focus:outline-none resize-none"
+                                 className="w-full border-0 focus:outline-none resize-none text-black"
                                  rows={4}
                                  placeholder="Type your sentence here. Select text and use buttons above to underline or make blanks."
                                  onKeyDown={(e) => {
@@ -210,14 +210,14 @@ const FieldEditor = ({ field, onChange, onRemove }) => {
                          </div>
                      </label>
 
-                    <span className="font-semibold">Cloze Options:</span>
+                    <span className="font-semibold text-black">Cloze Options:</span>
                     {(localField.clozeOptions || []).map((opt, index) => (
                         <div key={index} className="flex gap-2 mt-1">
                             <input
                                 type="text"
                                 value={opt.text}
                                 onChange={(e) => updateClozeOption(index, 'text', e.target.value)}
-                                className="border rounded w-full p-2"
+                                className="border rounded w-full p-2 text-black"
                             />
                             <input
                                 type="checkbox"
@@ -264,21 +264,21 @@ const FieldEditor = ({ field, onChange, onRemove }) => {
 
             {localField.type === 'comprehension' && (
                 <>
-                    <label className="block mb-2">
+                    <label className="block mb-2 text-black">
                         Passage:
                         <textarea
                             value={localField.comprehensionPassage || ''}
                             onChange={(e) => updateField('comprehensionPassage', e.target.value)}
-                            className="border rounded w-full p-2 mt-1"
+                            className="border rounded w-full p-2 mt-1 text-black"
                         />
                     </label>
-                    <label className="block mb-2">
+                    <label className="block mb-2 text-black">
                         Passage Image URL:
                         <input
                             type="text"
                             value={localField.comprehensionImageUrl || ''}
                             onChange={(e) => updateField('comprehensionImageUrl', e.target.value)}
-                            className="border rounded w-full p-2 mt-1"
+                            className="border rounded w-full p-2 mt-1 text-black"
                         />
                     </label>
                 </>
@@ -288,7 +288,7 @@ const FieldEditor = ({ field, onChange, onRemove }) => {
                 <>
                     {/* Categories */}
                     <div className="mb-4">
-                        <span className="font-semibold">Categories:</span>
+                        <span className="font-semibold text-black">Categories:</span>
                         <p className="text-sm text-gray-600 mb-2">Type the category titles below</p>
                         {(localField.categories || []).map((cat, index) => (
                             <div key={index} className="flex gap-2 mt-1">
@@ -301,7 +301,7 @@ const FieldEditor = ({ field, onChange, onRemove }) => {
                                         updated[index] = { ...updated[index], name: e.target.value, id: `cat_${index}` };
                                         updateField('categories', updated);
                                     }}
-                                    className="border rounded w-full p-2"
+                                    className="border rounded w-full p-2 text-black"
                                 />
                                 <button
                                     type="button"
@@ -334,7 +334,7 @@ const FieldEditor = ({ field, onChange, onRemove }) => {
 
                                          {/* Items to Categorize */}
                      <div className="mb-4">
-                         <span className="font-semibold">Items to Categorize:</span>
+                         <span className="font-semibold text-black">Items to Categorize:</span>
                          <p className="text-sm text-gray-600 mb-2">Add the options list under "Items". You can re-arrange the Items by using the drag icon.</p>
                          {(localField.itemsToCategorize || []).map((item, index) => (
                              <div 
@@ -371,7 +371,7 @@ const FieldEditor = ({ field, onChange, onRemove }) => {
                                          updated[index] = { ...updated[index], text: e.target.value, id: `item_${index}` };
                                          updateField('itemsToCategorize', updated);
                                      }}
-                                     className="border rounded w-full p-2"
+                                     className="border rounded w-full p-2 text-black"
                                  />
                                  <button
                                      type="button"
@@ -405,11 +405,11 @@ const FieldEditor = ({ field, onChange, onRemove }) => {
                     {/* Categorization Answers */}
                     {(localField.categories || []).length > 0 && (localField.itemsToCategorize || []).length > 0 && (
                         <div className="mb-4">
-                            <span className="font-semibold">Categorization Answers:</span>
+                            <span className="font-semibold text-black">Categorization Answers:</span>
                             <p className="text-sm text-gray-600 mb-2">Select the categories the items belong to</p>
                             {(localField.itemsToCategorize || []).map((item, itemIndex) => (
                                 <div key={itemIndex} className="flex items-center gap-2 mt-2 p-2 bg-gray-100 rounded">
-                                    <span className="font-medium min-w-0 flex-1">{item.text || `Item ${itemIndex + 1}`}</span>
+                                    <span className="font-medium min-w-0 flex-1 text-black">{item.text || `Item ${itemIndex + 1}`}</span>
                                     <span className="text-gray-500">→</span>
                                     <select
                                         value={(localField.categorizationAnswers || []).find(ans => ans.itemId === `item_${itemIndex}`)?.categoryId || ''}
@@ -425,7 +425,7 @@ const FieldEditor = ({ field, onChange, onRemove }) => {
                                             
                                             updateField('categorizationAnswers', updatedAnswers);
                                         }}
-                                        className="border rounded p-1"
+                                        className="border rounded p-1 text-black"
                                     >
                                         <option value="">Select category...</option>
                                         {(localField.categories || []).map((cat, catIndex) => (
@@ -443,23 +443,23 @@ const FieldEditor = ({ field, onChange, onRemove }) => {
 
             
                          {/* Common Fields */}
-             <label className="block mb-2">
+             <label className="block mb-2 text-black">
                  Points:
                  <input
                      type="number"
                      value={localField.points || 0}
                      onChange={(e) => updateField('points', Number(e.target.value))}
-                     className="border rounded w-full p-2 mt-1"
+                     className="border rounded w-full p-2 mt-1 text-black"
                  />
              </label>
 
-                         <label className="block mb-2">
+                         <label className="block mb-2 text-black">
                  Order:
                  <input
                      type="number"
                      value={localField.order || 0}
                      onChange={(e) => updateField('order', Number(e.target.value))}
-                     className="border rounded w-full p-2 mt-1"
+                     className="border rounded w-full p-2 mt-1 text-black"
                  />
              </label>
 

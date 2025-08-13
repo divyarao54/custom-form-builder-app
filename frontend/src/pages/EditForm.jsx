@@ -129,14 +129,14 @@ const EditForm = () => {
         <div>
             <img className='fixed top-0 left-0 w-full h-full object-cover opacity-100 z-0' src={bgImage} alt="Background" />
             <div className="max-w-3xl mx-auto p-4 relative z-10 bg-white bg-opacity-90 rounded-lg shadow-lg">
-                <h1 className="text-2xl font-bold mb-4">Edit Form</h1>
+                <h1 className="text-2xl font-bold mb-4 text-black">Edit Form</h1>
                 {error && (
                     <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
                         {error}
                     </div>
                 )}
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    <label className="block">
+                    <label className="block text-black">
                         Title:
                         <input
                             type="text"
@@ -147,7 +147,7 @@ const EditForm = () => {
                         />
                     </label>
 
-                    <label className="block">
+                    <label className="block text-black">
                         Description:
                         <textarea
                             value={description}
@@ -156,7 +156,7 @@ const EditForm = () => {
                         />
                     </label>
 
-                    <label className="block">
+                    <label className="block text-black">
                         Header Image URL:
                         <input
                             type="text"
@@ -167,7 +167,7 @@ const EditForm = () => {
                     </label>
 
                     <div>
-                        <h2 className="text-xl font-semibold mb-2">Questions</h2>
+                        <h2 className="text-xl font-semibold mb-2 text-black">Questions</h2>
                         {questions.map((question, index) => (
                             <FieldEditor
                                 key={index}

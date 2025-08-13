@@ -57,7 +57,7 @@ const Home = () => {
             {/* Content */}
             <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-4">
                 <div className="bg-white bg-opacity-90 p-8 rounded-lg shadow-xl max-w-2xl w-full">
-                    <h1 className="text-2xl font-bold mb-4 text-center">Available Forms</h1>
+                    <h1 className="text-2xl font-bold mb-4 text-center text-black">Available Forms</h1>
                     <FieldList forms={forms} />
                     
                     <div className="mt-6 text-center">

@@ -110,7 +110,7 @@ const CreateForm = () => {
     <div>
       <img className='fixed top-0 left-0 w-full h-full object-cover opacity-100 z-0' src={bgImage} alt="Background" />
       <div className="p-6 max-w-3xl mx-auto bg-white bg-opacity-90 rounded-lg shadow-lg relative z-10">
-        <h1 className="text-2xl font-bold mb-4">Create Form</h1>
+        <h1 className="text-2xl font-bold mb-4 text-black">Create Form</h1>
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
             {error}
@@ -118,7 +118,7 @@ const CreateForm = () => {
         )}
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Title */}
-          <label className="block">
+          <label className="block text-black">
             Title:
             <input
               type="text"
@@ -130,7 +130,7 @@ const CreateForm = () => {
           </label>
 
           {/* Description */}
-          <label className="block">
+          <label className="block text-black">
             Description:
             <textarea
               value={form.description}
@@ -142,7 +142,7 @@ const CreateForm = () => {
           </label>
 
           {/* Header Image URL */}
-          <label className="block">
+          <label className="block text-black">
             Header Image URL:
             <input
               type="text"
@@ -156,7 +156,7 @@ const CreateForm = () => {
 
           {/* Questions */}
           <div>
-            <h2 className="text-xl font-semibold mb-2">Questions</h2>
+            <h2 className="text-xl font-semibold mb-2 text-black">Questions</h2>
             {form.questions.map((q, index) => (
               <FieldEditor
                 key={index}

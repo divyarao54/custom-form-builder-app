@@ -17,7 +17,7 @@ function DraggableItem({ id, text }) {
       {...listeners}
       {...attributes}
       style={style}
-      className="p-2 bg-gray-100 border rounded shadow cursor-grab"
+      className="p-2 bg-gray-100 border rounded shadow cursor-grab text-black"
     >
       {text}
     </div>
@@ -82,7 +82,7 @@ function CategorizeQuestion({ question, questionIndex, handleCategorizeAnswer })
       <div className="space-y-4">
         {/* Unassigned Items */}
         <div>
-          <h4 className="font-medium mb-2">Items to Categorize:</h4>
+          <h4 className="font-medium mb-2 text-black">Items to Categorize:</h4>
           <div className="flex flex-wrap gap-3">
             {items.map(item => (
               <DraggableItem key={item.id} id={item.id} text={item.text} />
@@ -274,7 +274,7 @@ const TakeTest = () => {
   };
 
   if (loading) {
-    return <p className="text-center mt-4">Loading test...</p>;
+    return <p className="text-center mt-4 text-black">Loading test...</p>;
   }
 
   if (!form) {
@@ -282,17 +282,18 @@ const TakeTest = () => {
   }
 
   return (
-    <div>
+    <div className="relative min-h-screen">
       <img className='fixed top-0 left-0 w-full h-full object-cover opacity-100 z-0' src={bgImage}/>
       <div className="max-w-4xl mx-auto p-4 relative z-10 bg-white bg-opacity-90 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold mb-4">{form.title}</h1>
+        <h1 className="text-3xl font-bold mb-4 text-black">{form.title}</h1>
+        
         {form.description && (
           <p className="text-gray-600 mb-6">{form.description}</p>
         )}
-        
+
         {form.headerImageUrl && (
-          <img
-            src={form.headerImageUrl}
+          <img 
+            src={form.headerImageUrl} 
             alt={form.title}
             className="mb-6 w-full max-h-64 object-cover rounded border"
           />
@@ -304,19 +305,19 @@ const TakeTest = () => {
               form.questions.map((question, questionIndex) => (
                 <div key={questionIndex} className="border p-6 rounded shadow-sm bg-white">
                   <div className="mb-4">
-                    <h3 className="text-xl font-semibold mb-2">
-                      Question {questionIndex + 1}: {question.questionText}
+                    <h3 className="text-xl font-semibold mb-2 text-black">
+                      Question {questionIndex + 1}: {question.questionText || `Question ${questionIndex + 1}`}
                     </h3>
+                    
                     {question.questionImageUrl && (
-                      <img
-                        src={question.questionImageUrl}
-                        alt={`Question ${questionIndex + 1}`}
+                      <img 
+                        src={question.questionImageUrl} 
+                        alt="Question"
                         className="mt-2 w-full max-h-60 object-contain border rounded"
                       />
                     )}
-                    {question.points > 0 && (
-                      <p className="text-sm text-green-600">Points: {question.points}</p>
-                    )}
+                    
+                    <p className="text-sm text-green-600">Points: {question.points}</p>
                   </div>
 
                   {/* Question Type Specific Rendering */}
@@ -327,15 +328,15 @@ const TakeTest = () => {
                           <input
                             type={question.type === 'mcq' ? 'radio' : 'checkbox'}
                             name={`question-${questionIndex}`}
-                            value={optionIndex}
+                            value={option._id || optionIndex}
                             onChange={(e) => {
                               if (question.type === 'mcq') {
-                                handleAnswerChange(questionIndex, option.text, optionIndex);
+                                handleAnswerChange(questionIndex, e.target.value);
                               } else {
                                 // Handle multiple choice answers
                                 const currentAnswers = answers[questionIndex] || [];
                                 if (e.target.checked) {
-                                  handleAnswerChange(questionIndex, [...currentAnswers, { value: option.text, optionIndex }]);
+                                  handleAnswerChange(questionIndex, [...currentAnswers, { value: option._id || optionIndex, optionIndex }]);
                                 } else {
                                   handleAnswerChange(questionIndex, currentAnswers.filter(ans => ans.optionIndex !== optionIndex));
                                 }
@@ -343,7 +344,7 @@ const TakeTest = () => {
                             }}
                             className="text-blue-600"
                           />
-                          <span>{option.text}</span>
+                          <span className="text-black">{option.text}</span>
                         </label>
                       ))}
                     </div>
@@ -370,11 +371,11 @@ const TakeTest = () => {
                             <input
                               type="radio"
                               name={`cloze-${questionIndex}`}
-                              value={optionIndex}
-                              onChange={(e) => handleAnswerChange(questionIndex, option.text, optionIndex)}
+                              value={option._id || optionIndex}
+                              onChange={(e) => handleAnswerChange(questionIndex, e.target.value)}
                               className="text-blue-600"
                             />
-                            <span>{option.text}</span>
+                            <span className="text-black">{option.text}</span>
                           </label>
                         ))}
                       </div>
@@ -384,12 +385,12 @@ const TakeTest = () => {
                   {question.type === 'comprehension' && (
                     <div className="space-y-4">
                       <div className="bg-gray-50 p-4 rounded">
-                        <h4 className="font-medium mb-2">Passage:</h4>
+                        <h4 className="font-medium mb-2 text-black">Passage:</h4>
                         <p className="text-gray-700 whitespace-pre-line">{question.comprehensionPassage}</p>
                         {question.comprehensionImageUrl && (
-                          <img
-                            src={question.comprehensionImageUrl}
-                            alt="Passage"
+                          <img 
+                            src={question.comprehensionImageUrl} 
+                            alt="Comprehension"
                             className="mt-2 w-full max-h-60 object-contain border rounded"
                           />
                         )}
@@ -400,7 +401,7 @@ const TakeTest = () => {
                 </div>
               ))
             ) : (
-              <p className="text-gray-500">This test has no questions.</p>
+              <p className="text-gray-500 text-center">This test has no questions.</p>
             )}
 
             <div className="flex justify-center">
@@ -424,8 +425,8 @@ const TakeTest = () => {
             {form.questions.map((question, questionIndex) => (
               <div key={questionIndex} className="border p-6 rounded shadow-sm bg-white">
                 <div className="mb-4">
-                  <h3 className="text-xl font-semibold mb-2">
-                    Question {questionIndex + 1}: {question.questionText}
+                  <h3 className="text-xl font-semibold mb-2 text-black">
+                    Question {questionIndex + 1}: {question.questionText || `Question ${questionIndex + 1}`}
                   </h3>
                   <div className={`inline-block px-3 py-1 rounded text-sm font-medium ${
                     results[questionIndex]?.isCorrect 
@@ -442,7 +443,7 @@ const TakeTest = () => {
                 </div>
 
                 <div className="bg-gray-50 p-4 rounded">
-                  <h4 className="font-medium mb-2">Feedback:</h4>
+                  <h4 className="font-medium mb-2 text-black">Feedback:</h4>
                   <p className="text-gray-700">{results[questionIndex]?.feedback}</p>
                 </div>
               </div>
